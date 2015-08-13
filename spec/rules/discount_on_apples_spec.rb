@@ -4,9 +4,7 @@ require "rules/discount_on_apples"
 RSpec.describe Rules::DiscountOnApples do
   context 'when there is less than 3 apples' do
     it 'does not apply' do
-      items = [Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1'),
-               Item.new(price: 5.00, name: 'Apple', product_code: 'AP1'),
-               Item.new(price: 5.00, name: 'Apple', product_code: 'AP1')]
+      items = [fruit_tea_item, apple_item, apple_item]
 
       rule = Rules::DiscountOnApples.new(items)
       expect(rule).not_to be_apply
@@ -14,11 +12,7 @@ RSpec.describe Rules::DiscountOnApples do
   end
 
   context 'with at least 3 apples in items' do
-    let(:items) { [Item.new(price: 5.00, name: 'Apple', product_code: 'AP1'),
-                   Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1'),
-                   Item.new(price: 5.00, name: 'Apple', product_code: 'AP1'),
-                   Item.new(price: 11.23, name: 'Coffee', product_code: 'CF1'),
-                   Item.new(price: 5.00, name: 'Apple', product_code: 'AP1')] }
+    let(:items) { [apple_item, fruit_tea_item, apple_item, coffee_item, apple_item] }
 
     let(:rule) { Rules::DiscountOnApples.new(items) }
 

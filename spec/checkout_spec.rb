@@ -9,14 +9,14 @@ RSpec.describe Checkout do
 
     describe "#scan" do
       it 'scans an item' do
-        expect(checkout.scan(Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1'))).to eq(true)
+        expect(checkout.scan(fruit_tea_item)).to eq(true)
       end
     end
 
     describe "#total" do
       it 'returns the total price of all items' do
-        checkout.scan(Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1'))
-        checkout.scan(Item.new(price: 5.00, name: 'Apple', product_code: 'AP1'))
+        checkout.scan(fruit_tea_item)
+        checkout.scan(apple_item)
 
         expect(checkout.total).to eq(8.11)
       end
@@ -26,9 +26,9 @@ RSpec.describe Checkout do
   context 'when using rules' do
     let(:checkout) { Checkout.new(rules: [Rules::BuyOneGetOneFruitTea, Rules::DiscountOnApples]) }
     let(:checkout_fruit_tea) do
-      checkout.scan(Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1'))
-      checkout.scan(Item.new(price: 5.00, name: 'Apple', product_code: 'AP1'))
-      checkout.scan(Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1'))
+      checkout.scan(fruit_tea_item)
+      checkout.scan(apple_item)
+      checkout.scan(fruit_tea_item)
       checkout
     end
 

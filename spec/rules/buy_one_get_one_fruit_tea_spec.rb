@@ -4,7 +4,7 @@ require "rules/buy_one_get_one_fruit_tea"
 RSpec.describe Rules::BuyOneGetOneFruitTea do
   context 'no pack of fruit tea in items' do
     it 'does not apply' do
-      items = [Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1')]
+      items = [fruit_tea_item]
 
       rule = Rules::BuyOneGetOneFruitTea.new(items)
       expect(rule).not_to be_apply
@@ -12,11 +12,7 @@ RSpec.describe Rules::BuyOneGetOneFruitTea do
   end
 
   context 'with at least a pack of fruit tea in items' do
-    let(:items) { [Item.new(price: 5.00, name: 'Apple', product_code: 'AP1'),
-                   Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1'),
-                   Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1'),
-                   Item.new(price: 11.23, name: 'Coffee', product_code: 'CF1'),
-                   Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1')] }
+    let(:items) { [apple_item, fruit_tea_item, fruit_tea_item, coffee_item, fruit_tea_item] }
 
     let(:rule) { Rules::BuyOneGetOneFruitTea.new(items) }
 

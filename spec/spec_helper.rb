@@ -16,6 +16,23 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+module Factories
+  module Items
+    def fruit_tea_item
+      Item.new(price: 3.11, name: 'Fruit tea', product_code: 'FR1')
+    end
+
+    def apple_item
+      Item.new(price: 5.00, name: 'Apple', product_code: 'AP1')
+    end
+
+    def coffee_item
+      Item.new(price: 11.23, name: 'Coffee', product_code: 'CF1')
+    end
+  end
+end
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -39,6 +56,8 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
+
+  config.include Factories::Items
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
