@@ -11,7 +11,7 @@ RSpec.describe "Integration" do
     checkout.scan(fruit_tea_item)
     checkout.scan(coffee_item)
 
-    expect(checkout.total).to eq(19.34)
+    expect(checkout.total).to eq(19.34) # Not 22.25 like in the statement! There are 2 fruit tea, so one free, the CEO is happy.
   end
 
   it "applies the discount 'buy-one-get-one-fruit-tea' the Return" do
